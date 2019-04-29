@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">EntelCaramel2</string>
+    <string name="selecciona">Selecciona el envoltorio</string>
+    <string name="SeleccionCaramelo">Selecciona el caramelo</string>
+    <string name="rosa">Rosa</string>
+    <string name="gris">Gris</string>
+    <string name="naranja">Naranja</string>
+    <string name="turquesa">Turquesa</string>
+    <string name="enviardatos">Pulsa para enviar datos</string>
+</resources>
