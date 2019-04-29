@@ -4,31 +4,32 @@ import java.io.Serializable;
 
 public class Caramelo implements Serializable {
 
-    private String envoltorio;
-    private String caramelo;
+    private int envoltorio;
+    private int sabor;
 
     public Caramelo() {
 
     }
 
-    public Caramelo(String envoltorio, String caramelo) {
+    public Caramelo(int envoltorio, int sabor) {
         this.envoltorio = envoltorio;
-        this.caramelo = caramelo;
+        this.sabor = sabor;
     }
 
-    public String getEnvoltorio() {
+    public int getSabor() {
+        return sabor;
+    }
+
+    public void setSabor(int sabor) {
+        this.sabor = sabor;
+    }
+
+    public int getEnvoltorio() {
         return envoltorio;
     }
 
-    public void setEnvoltorio(String envoltorio) {
+    public void setEnvoltorio(int envoltorio) {
         this.envoltorio = envoltorio;
     }
 
-    public String getCaramelo() {
-        return caramelo;
-    }
-
-    public void setCaramelo(String caramelo) {
-        this.caramelo = caramelo;
-    }
 }

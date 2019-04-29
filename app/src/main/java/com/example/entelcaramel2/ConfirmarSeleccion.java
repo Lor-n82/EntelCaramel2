@@ -1,16 +1,19 @@
 package com.example.entelcaramel2;
-
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.entelcaramel2.Objetos.Caramelo;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class ConfirmarSeleccion extends AppCompatActivity {
 
@@ -21,6 +24,9 @@ public class ConfirmarSeleccion extends AppCompatActivity {
     private AlphaAnimation blinkanimation, fadeIn;
     private TextView texto;
     private Typeface tipoLetra;
+    private DatabaseReference caramelosDB;
+    private Intent intento;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +35,16 @@ public class ConfirmarSeleccion extends AppCompatActivity {
 
         imagenEnvoltorio = (ImageView)findViewById(R.id.imageViewEnvoltorioFinal);
         imagenCaramelo = (ImageView)findViewById(R.id.imageViewCarameloFinal);
+        imagen = (ImageView)findViewById(R.id.imageViewEnviarDatos);
+
+        imagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intento = new Intent(getApplicationContext(), Estadisticas.class);
+                añadirValores(envoltorio, caramelo);
+                startActivity(intento);
+            }
+        });
         texto = (TextView)findViewById(R.id.textViewEnviaDatos);
 
         //Recojo valores
@@ -69,13 +85,17 @@ public class ConfirmarSeleccion extends AppCompatActivity {
         texto.setTextSize(20);
         texto.setAnimation(blinkanimation);
 
+        FirebaseApp.initializeApp(this) ;
+        caramelosDB = FirebaseDatabase.getInstance().getReference("entelcaramel2");
+
     }
 
-    public void onClick(View vista){
-        imagen = (ImageView) vista;
-
-        if(imagen.getId() == R.id.imageViewEnviarDatos){
-
+    public void añadirValores(int envoltorio, int sabor){
+        //Enviamos a la DB
+        String newid = caramelosDB.push().getKey();
+        Caramelo caramelo = new Caramelo(envoltorio,sabor);
+        if(newid!=null) {
+            caramelosDB.child(newid).setValue(caramelo);
         }
     }
 }
