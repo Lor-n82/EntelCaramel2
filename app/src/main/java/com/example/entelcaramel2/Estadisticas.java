@@ -35,12 +35,12 @@ public class Estadisticas extends AppCompatActivity {
     private static final String CARAMELO = "caramelo";
     private int envoltorio = 0, sabor = 0;
     private PieChart pieChart;
-    private String[] colores = new String[]{"verde", "azul", "amarillo", "rojo", "gris"};
+    private String[] colores = new String[]{"Azul", "Gris", "Naranja", "Rojo", "Verde"};
     private ArrayList<Integer> envoltorios = new ArrayList<>();
     private ArrayList<Integer> sabores = new ArrayList<>();
     private ArrayList<Integer> estadisticas = new ArrayList<>();
     int cont = 0;
-    private int[] color = new int[]{Color.YELLOW, Color.RED,Color.rgb(0,150,100),Color.BLUE,Color.rgb(255,100,0)};
+    private int[] color = new int[]{Color.rgb(25,50,225), Color.GRAY,Color.rgb(255,120,25),Color.RED,Color.rgb(25,200,25)};
     private DatabaseReference fireDB;
 
     @Override
@@ -62,9 +62,9 @@ public class Estadisticas extends AppCompatActivity {
                     envoltorios.add(Integer.parseInt(nodo.child("envoltorio").getValue().toString()));
                     sabores.add(Integer.parseInt(nodo.child("sabor").getValue().toString()));
 
-                    if(envoltorios.get(cont) == envoltorio){
+                    //if(envoltorios.get(cont) == envoltorio){
                         estadisticas.add(sabores.get(cont));
-                    }
+                    //}
 
                     cont = cont+1;
                 }
@@ -80,20 +80,37 @@ public class Estadisticas extends AppCompatActivity {
 
     }
 
+    /**
+     * Establece parametros de la leyenda
+     * @param chart
+     * @param description
+     * @param textColor
+     * @param bgColor
+     * @param animateTime
+     * @return
+     */
     private Chart getSameChart(Chart chart, String description, int textColor, int bgColor, int animateTime) {
         chart.getDescription().setText(description);
-        chart.getDescription().setTextSize(15);
+        chart.getDescription().setTextSize(33);
+        chart.getDescription().setTextColor(Color.WHITE);
         chart.setBackgroundColor(bgColor);
         chart.animateY(animateTime);
         legend(chart);
         return chart;
     }
 
+    /**
+     * Establece la leyenda
+     * @param chart
+     */
     private void legend(Chart chart) {
+
         Legend l = chart.getLegend();
         l.setForm(Legend.LegendForm.CIRCLE);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        l.setTextSize(18);
+        l.setTextColor(Color.WHITE);
 
         ArrayList<LegendEntry> entries = new ArrayList<>();
         for (int i = 0; i < colores.length; i++) {
@@ -131,6 +148,9 @@ public class Estadisticas extends AppCompatActivity {
         axis.setEnabled(false);
     }
 
+    /**
+     * Crea el gráfico
+     */
     public void createCharts() {
         pieChart = (PieChart) getSameChart(pieChart, "Estadisticas", Color.WHITE, Color.DKGRAY,3000);
         pieChart.setHoleRadius(40);
@@ -142,16 +162,26 @@ public class Estadisticas extends AppCompatActivity {
         //pieChart.setDrawHoleEnabled(false);
     }
 
+    /**
+     * Trata los datos de la tarta
+     * @param dataSet
+     * @return
+     */
     private DataSet getData(DataSet dataSet) {
         dataSet.setColors(color);
         dataSet.setValueTextColor(Color.WHITE);
-        dataSet.setValueTextSize(16);
+        dataSet.setValueTextSize(18);
+        dataSet.setDrawValues(false);
         return dataSet;
     }
 
+    /**
+     * Trata datos de las porciones
+     * @return
+     */
     private PieData getPieData() {
         PieDataSet pieDataSet = (PieDataSet) getData(new PieDataSet(getPieEntries(),""));
-        pieDataSet.setSliceSpace(10);
+        pieDataSet.setSliceSpace(25);
         pieDataSet.setValueFormatter(new PercentFormatter());
         return new PieData(pieDataSet);
     }

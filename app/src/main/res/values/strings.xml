@@ -7,4 +7,8 @@
     <string name="naranja">Naranja</string>
     <string name="turquesa">Turquesa</string>
     <string name="enviardatos">Pulsa para enviar datos</string>
+    <string name="carameloTurquesa">Estadistica envoltorio \n Turquesa</string>
+    <string name="caramelonaranja">Estadistica envoltorio \n Naranja</string>
+    <string name="carameloRosa">Estadistica envoltorio \n Rosa</string>
+    <string name="carameloGris">Estadistica envoltorio \n Gris</string>
 </resources>

@@ -83,7 +83,7 @@ public class ConfirmarSeleccion extends AppCompatActivity {
         imagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intento = new Intent(getApplicationContext(), Estadisticas.class);
+                intento = new Intent(getApplicationContext(), Estadisticas2.class);
                 intento.putExtra(ENVOLTORIO,envoltorio);
                 intento.putExtra(CARAMELO,caramelo);
                 añadirValores(envoltorio, caramelo);
