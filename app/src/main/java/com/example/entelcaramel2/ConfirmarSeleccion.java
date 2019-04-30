@@ -37,14 +37,6 @@ public class ConfirmarSeleccion extends AppCompatActivity {
         imagenCaramelo = (ImageView)findViewById(R.id.imageViewCarameloFinal);
         imagen = (ImageView)findViewById(R.id.imageViewEnviarDatos);
 
-        imagen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intento = new Intent(getApplicationContext(), Estadisticas.class);
-                añadirValores(envoltorio, caramelo);
-                startActivity(intento);
-            }
-        });
         texto = (TextView)findViewById(R.id.textViewEnviaDatos);
 
         //Recojo valores
@@ -88,6 +80,16 @@ public class ConfirmarSeleccion extends AppCompatActivity {
         FirebaseApp.initializeApp(this) ;
         caramelosDB = FirebaseDatabase.getInstance().getReference("entelcaramel2");
 
+        imagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intento = new Intent(getApplicationContext(), Estadisticas.class);
+                intento.putExtra(ENVOLTORIO,envoltorio);
+                intento.putExtra(CARAMELO,caramelo);
+                añadirValores(envoltorio, caramelo);
+                startActivity(intento);
+            }
+        });
     }
 
     public void añadirValores(int envoltorio, int sabor){

@@ -1,9 +1,14 @@
 package com.example.entelcaramel2;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.example.entelcaramel2.Objetos.Caramelo;
 import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -16,24 +21,63 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class Estadisticas extends AppCompatActivity {
 
+    private static final String ENVOLTORIO = "envoltorio";
+    private static final String CARAMELO = "caramelo";
+    private int envoltorio = 0, sabor = 0;
     private PieChart pieChart;
-
     private String[] colores = new String[]{"verde", "azul", "amarillo", "rojo", "gris"};
-    private int[] datos = new int[]{5, 10, 15, 20, 25};
+    private ArrayList<Integer> envoltorios = new ArrayList<>();
+    private ArrayList<Integer> sabores = new ArrayList<>();
+    private ArrayList<Integer> estadisticas = new ArrayList<>();
+    int cont = 0;
     private int[] color = new int[]{Color.YELLOW, Color.RED,Color.rgb(0,150,100),Color.BLUE,Color.rgb(255,100,0)};
+    private DatabaseReference fireDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estadisticas);
 
+        envoltorio = getIntent().getExtras().getInt(ENVOLTORIO);
+        sabor = getIntent().getExtras().getInt(CARAMELO);
+
         pieChart = findViewById(R.id.pieChart);
-        createCharts();
+
+        fireDB = FirebaseDatabase.getInstance().getReference().child("entelcaramel2");
+
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot nodo : dataSnapshot.getChildren()){
+                    envoltorios.add(Integer.parseInt(nodo.child("envoltorio").getValue().toString()));
+                    sabores.add(Integer.parseInt(nodo.child("sabor").getValue().toString()));
+
+                    if(envoltorios.get(cont) == envoltorio){
+                        estadisticas.add(sabores.get(cont));
+                    }
+
+                    cont = cont+1;
+                }
+                createCharts();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        };
+        fireDB.addListenerForSingleValueEvent(eventListener);
+
+
     }
 
     private Chart getSameChart(Chart chart, String description, int textColor, int bgColor, int animateTime) {
@@ -49,12 +93,14 @@ public class Estadisticas extends AppCompatActivity {
         Legend l = chart.getLegend();
         l.setForm(Legend.LegendForm.CIRCLE);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
 
         ArrayList<LegendEntry> entries = new ArrayList<>();
         for (int i = 0; i < colores.length; i++) {
             LegendEntry entry = new LegendEntry();
             entry.formColor = color[i];
             entry.label = colores[i];
+            entry.formSize = 20.0f;
             entries.add(entry);
         }
         l.setCustom(entries);
@@ -62,8 +108,8 @@ public class Estadisticas extends AppCompatActivity {
 
     private ArrayList<PieEntry> getPieEntries() {
         ArrayList<PieEntry> entries = new ArrayList<>();
-        for (int i = 0; i < datos.length; i++) {
-            entries.add(new PieEntry(i, datos[i]));
+        for (int i = 0; i < estadisticas.size(); i++) {
+            entries.add(new PieEntry(i, estadisticas.get(i)));
         }
         return entries;
     }
@@ -108,5 +154,12 @@ public class Estadisticas extends AppCompatActivity {
         pieDataSet.setSliceSpace(10);
         pieDataSet.setValueFormatter(new PercentFormatter());
         return new PieData(pieDataSet);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(i);
     }
 }
