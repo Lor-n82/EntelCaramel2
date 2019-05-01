@@ -42,12 +42,12 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:onClick="onClick"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3"
-        app:srcCompat="@drawable/envoltoriorosa"
-        android:onClick="onClick"/>
+        app:srcCompat="@drawable/envoltoriorosa" />
 
     <ImageView
         android:id="@+id/imageViewEnvoltorioTurquesa"
@@ -57,12 +57,12 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:onClick="onClick"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/guideline3"
-        app:srcCompat="@drawable/envoltorioturquesa"
-        android:onClick="onClick"/>
+        app:srcCompat="@drawable/envoltorioturquesa" />
 
     <ImageView
         android:id="@+id/imageViewEnvoltorioNaranja"
@@ -72,12 +72,12 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:onClick="onClick"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewEnvoltorioRosa"
-        app:srcCompat="@drawable/envoltorionaranja"
-        android:onClick="onClick"/>
+        app:srcCompat="@drawable/envoltorionaranja" />
 
     <ImageView
         android:id="@+id/imageViewEnvoltorioGris"
@@ -87,12 +87,12 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:onClick="onClick"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:srcCompat="@drawable/envoltoriogris"
-        android:onClick="onClick"/>
+        app:srcCompat="@drawable/envoltoriogris" />
 
     <TextView
         android:id="@+id/textViewSelecciona"
@@ -112,5 +112,26 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="500dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="685dp" />
+
+    <ImageView
+        android:id="@+id/imageViewEstadisticas"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="onClick"
+        app:layout_constraintBottom_toTopOf="@+id/guideline17"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline5"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/estadisticas" />
 
 </android.support.constraint.ConstraintLayout>

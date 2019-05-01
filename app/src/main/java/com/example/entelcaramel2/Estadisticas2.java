@@ -27,7 +27,7 @@ public class Estadisticas2 extends AppCompatActivity {
     private ArrayList<Integer> envoltorios = new ArrayList<>();
     private ArrayList<Integer> sabores = new ArrayList<>();
     private ArrayList<Integer> estadisticas = new ArrayList<>();
-    int cont = 0;
+    int cont = 0, mismoEnvoltorio = 0;
     private DatabaseReference fireDB;
     private List<SliceValue> pieData = new ArrayList<>();
     private PieChartView pieChartView;
@@ -53,9 +53,10 @@ public class Estadisticas2 extends AppCompatActivity {
 
                     if(envoltorios.get(cont) == envoltorio){
                         estadisticas.add(sabores.get(cont));
+                        mismoEnvoltorio +=1;
                     }
 
-                    cont = cont+1;
+                    cont += 1;
                 }
                 createData(envoltorio);
             }
@@ -89,13 +90,24 @@ public class Estadisticas2 extends AppCompatActivity {
                 default:defecto++;break;
             }
         }
-
-        pieData.add(new SliceValue(azul, Color.BLUE));
-        pieData.add(new SliceValue(gris, Color.GRAY));
-        pieData.add(new SliceValue(naranja, Color.rgb(220,100,10)));
-        pieData.add(new SliceValue(rojo, Color.RED));
-        pieData.add(new SliceValue(verde, Color.GREEN));
-        pieData.add(new SliceValue(defecto, Color.BLACK));
+        if(azul !=0) {
+            pieData.add(new SliceValue(azul, Color.BLUE));
+        }
+        if(gris !=0) {
+            pieData.add(new SliceValue(gris, Color.GRAY));
+        }
+        if(naranja !=0) {
+            pieData.add(new SliceValue(naranja, Color.rgb(220, 100, 10)));
+        }
+        if(rojo !=0) {
+            pieData.add(new SliceValue(rojo, Color.RED));
+        }
+        if(verde !=0) {
+            pieData.add(new SliceValue(verde, Color.GREEN));
+        }
+        if(defecto !=0) {
+            pieData.add(new SliceValue(defecto, Color.BLACK));
+        }
 
         pieChartData = new PieChartData(pieData);
 
@@ -106,7 +118,9 @@ public class Estadisticas2 extends AppCompatActivity {
             case 2:env=getResources().getString(R.string.caramelonaranja);break;
             case 3:env=getResources().getString(R.string.carameloTurquesa);break;
         }
-        pieChartData.setHasCenterCircle(true).setCenterText1(env).setCenterText1FontSize(16).setCenterText1Color(Color.parseColor("#0097A7"));
+        pieChartData.setHasLabels(true);
+        pieChartData.setHasCenterCircle(true).setCenterText1(env + " " + mismoEnvoltorio)
+                .setCenterText1FontSize(16).setCenterText1Color(Color.parseColor("#0097A7"));
         pieChartView.setPieChartData(pieChartData);
     }
 

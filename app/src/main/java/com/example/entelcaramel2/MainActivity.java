@@ -11,6 +11,8 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dd.CircularProgressButton;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String ENVOLTORIO = "envoltorio";
@@ -51,8 +53,6 @@ public class MainActivity extends AppCompatActivity {
         texto.setTypeface(tipoLetra);
         texto.setTextSize(20);
         texto.setAnimation(blinkanimation);
-
-
     }
 
     public void onClick(View vista){
@@ -75,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
             if(imagen.getId() == R.id.imageViewEnvoltorioTurquesa){
                 intento.putExtra(ENVOLTORIO,3);
+            }
+            if(imagen.getId() == R.id.imageViewEstadisticas){
+                intento = new Intent(getApplicationContext(), EstadisticasGlobales.class);
             }
 
         startActivity(intento);

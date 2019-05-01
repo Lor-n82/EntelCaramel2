@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "949247371627",
+    "firebase_url": "https://entelcaramel2.firebaseio.com",
+    "project_id": "entelcaramel2",
+    "storage_bucket": "entelcaramel2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949247371627:android:ed8d5c841f8a7bde",
+        "android_client_info": {
+          "package_name": "com.example.entelcaramel2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "949247371627-o9dho29elokipdsrfij5n0mrp3jb9cva.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBS-ckXQgXEsVwKSmDNym9nEZ7LlHiht7Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "949247371627-o9dho29elokipdsrfij5n0mrp3jb9cva.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

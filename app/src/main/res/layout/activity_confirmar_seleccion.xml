@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline15"
-        app:srcCompat="@drawable/enviar" />
+        app:srcCompat="@drawable/botonenviar" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline16"

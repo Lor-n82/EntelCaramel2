@@ -7,8 +7,13 @@
     <string name="naranja">Naranja</string>
     <string name="turquesa">Turquesa</string>
     <string name="enviardatos">Pulsa para enviar datos</string>
-    <string name="carameloTurquesa">Estadistica envoltorio \n Turquesa</string>
-    <string name="caramelonaranja">Estadistica envoltorio \n Naranja</string>
-    <string name="carameloRosa">Estadistica envoltorio \n Rosa</string>
-    <string name="carameloGris">Estadistica envoltorio \n Gris</string>
+    <string name="carameloTurquesa">Estadistica envoltorio Turquesa</string>
+    <string name="caramelonaranja">Estadistica envoltorio Naranja</string>
+    <string name="carameloRosa">Estadistica envoltorio Rosa</string>
+    <string name="carameloGris">Estadistica envoltorio Gris</string>
+    <string name="Error">Error en la carga</string>
+    <string name="Complete">Carga completada</string>
+    <string name="Upload">Carga</string>
+    <string name="mostrarEstadisticas">Mostrar estadísticas globales</string>
+
 </resources>
