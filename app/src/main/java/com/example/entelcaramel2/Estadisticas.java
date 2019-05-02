@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.entelcaramel2.Objetos.Caramelo;
-import com.github.mikephil.charting.charts.Chart;
+/*import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
@@ -20,7 +20,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.formatter.PercentFormatter;*/
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +34,7 @@ public class Estadisticas extends AppCompatActivity {
     private static final String ENVOLTORIO = "envoltorio";
     private static final String CARAMELO = "caramelo";
     private int envoltorio = 0, sabor = 0;
-    private PieChart pieChart;
+    //private PieChart pieChart;
     private String[] colores = new String[]{"Azul", "Gris", "Naranja", "Rojo", "Verde"};
     private ArrayList<Integer> envoltorios = new ArrayList<>();
     private ArrayList<Integer> sabores = new ArrayList<>();
@@ -51,7 +51,7 @@ public class Estadisticas extends AppCompatActivity {
         envoltorio = getIntent().getExtras().getInt(ENVOLTORIO);
         sabor = getIntent().getExtras().getInt(CARAMELO);
 
-        pieChart = findViewById(R.id.pieChart);
+        //pieChart = findViewById(R.id.pieChart);
 
         fireDB = FirebaseDatabase.getInstance().getReference().child("entelcaramel2");
 
@@ -68,7 +68,7 @@ public class Estadisticas extends AppCompatActivity {
 
                     cont = cont+1;
                 }
-                createCharts();
+                //createCharts();
             }
 
             @Override
@@ -89,7 +89,7 @@ public class Estadisticas extends AppCompatActivity {
      * @param animateTime
      * @return
      */
-    private Chart getSameChart(Chart chart, String description, int textColor, int bgColor, int animateTime) {
+    /*private Chart getSameChart(Chart chart, String description, int textColor, int bgColor, int animateTime) {
         chart.getDescription().setText(description);
         chart.getDescription().setTextSize(33);
         chart.getDescription().setTextColor(Color.WHITE);
@@ -97,13 +97,13 @@ public class Estadisticas extends AppCompatActivity {
         chart.animateY(animateTime);
         legend(chart);
         return chart;
-    }
+    }*/
 
     /**
      * Establece la leyenda
      * @param chart
      */
-    private void legend(Chart chart) {
+    /*private void legend(Chart chart) {
 
         Legend l = chart.getLegend();
         l.setForm(Legend.LegendForm.CIRCLE);
@@ -146,12 +146,12 @@ public class Estadisticas extends AppCompatActivity {
 
     private void axisRight(YAxis axis) {
         axis.setEnabled(false);
-    }
+    }*/
 
     /**
      * Crea el gráfico
      */
-    public void createCharts() {
+   /* public void createCharts() {
         pieChart = (PieChart) getSameChart(pieChart, "Estadisticas", Color.WHITE, Color.DKGRAY,3000);
         pieChart.setHoleRadius(40);
         pieChart.setHoleColor(Color.DKGRAY);
@@ -160,36 +160,36 @@ public class Estadisticas extends AppCompatActivity {
         pieChart.setData(getPieData());
         pieChart.invalidate();
         //pieChart.setDrawHoleEnabled(false);
-    }
+    }*/
 
     /**
      * Trata los datos de la tarta
      * @param dataSet
      * @return
      */
-    private DataSet getData(DataSet dataSet) {
+    /*private DataSet getData(DataSet dataSet) {
         dataSet.setColors(color);
         dataSet.setValueTextColor(Color.WHITE);
         dataSet.setValueTextSize(18);
         dataSet.setDrawValues(false);
         return dataSet;
-    }
+    }*/
 
     /**
      * Trata datos de las porciones
      * @return
      */
-    private PieData getPieData() {
+   /* private PieData getPieData() {
         PieDataSet pieDataSet = (PieDataSet) getData(new PieDataSet(getPieEntries(),""));
         pieDataSet.setSliceSpace(25);
         pieDataSet.setValueFormatter(new PercentFormatter());
         return new PieData(pieDataSet);
-    }
+    }*/
 
-    @Override
-    public void onBackPressed() {
+    //@Override
+    /*public void onBackPressed() {
         super.onBackPressed();
         Intent i = new Intent(getApplicationContext(),MainActivity.class);
         startActivity(i);
-    }
+    }*/
 }

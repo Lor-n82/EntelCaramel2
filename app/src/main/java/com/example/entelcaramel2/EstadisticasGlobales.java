@@ -1,9 +1,11 @@
 package com.example.entelcaramel2;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,6 +35,8 @@ public class EstadisticasGlobales extends AppCompatActivity {
     private ArrayList<Integer> estadisticasNaranja = new ArrayList<>();
     private ArrayList<Integer> estadisticasGris = new ArrayList<>();
     private int cont = 0, contR = 0, contT = 0, contN = 0, contG = 0;
+    private Typeface tipoLetra;
+    private TextView rosa, turquesa, naranja, gris, totalRosa, totalTurquesa, totalNaranja, totalGris;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +45,28 @@ public class EstadisticasGlobales extends AppCompatActivity {
 
         pieChartViewRosa = (PieChartView)findViewById(R.id.chartRosa);
         pieChartViewTurquesa = (PieChartView)findViewById(R.id.chartTurquesa);
-        pieChartViewNaranja = (PieChartView)findViewById(R.id.chartRosa);
-        pieChartViewGris = (PieChartView)findViewById(R.id.chartRosa);
+        pieChartViewNaranja = (PieChartView)findViewById(R.id.chartNaranja);
+        pieChartViewGris = (PieChartView)findViewById(R.id.chartGris);
+
+        rosa = (TextView)findViewById(R.id.textViewRosa);
+        turquesa = (TextView)findViewById(R.id.textViewTotalTurquesa);
+        naranja = (TextView)findViewById(R.id.textViewNaranja);
+        gris = (TextView)findViewById(R.id.textViewTotalGris);
+        totalRosa = (TextView)findViewById(R.id.textViewTotalRosa);
+        totalTurquesa = (TextView)findViewById(R.id.textViewTotalTurquesa);
+        totalNaranja = (TextView)findViewById(R.id.textViewTotalNaranja);
+        totalGris = (TextView)findViewById(R.id.textViewTotalGris);
+
+        String rutaFuente = "fuentes/eadesignerregular.ttf";
+        this.tipoLetra = Typeface.createFromAsset(getAssets(), rutaFuente);
+        rosa.setTypeface(tipoLetra);
+        turquesa.setTypeface(tipoLetra);
+        naranja.setTypeface(tipoLetra);
+        gris.setTypeface(tipoLetra);
+        totalRosa.setTypeface(tipoLetra);
+        totalTurquesa.setTypeface(tipoLetra);
+        totalNaranja.setTypeface(tipoLetra);
+        totalGris.setTypeface(tipoLetra);
 
         fireDB = FirebaseDatabase.getInstance().getReference().child("entelcaramel2");
 
@@ -54,24 +78,46 @@ public class EstadisticasGlobales extends AppCompatActivity {
                     sabores.add(Integer.parseInt(nodo.child("sabor").getValue().toString()));
 
                     if(envoltorios.get(cont) == 0){
-                        estadisticasRosa.add(sabores.get(contR));
-                        contR++;
+                        estadisticasRosa.add(sabores.get(cont));
                     }
                     if(envoltorios.get(cont) == 1){
-                        estadisticasGris.add(sabores.get(contG));
-                        contG++;
+                        estadisticasGris.add(sabores.get(cont));
                     }
                     if(envoltorios.get(cont) == 2){
-                        estadisticasNaranja.add(sabores.get(contN));
-                        contN++;
+                        estadisticasNaranja.add(sabores.get(cont));
                     }
                     if(envoltorios.get(cont) == 3){
-                        estadisticasTurquesa.add(sabores.get(contT));
-                        contT++;
+                        estadisticasTurquesa.add(sabores.get(cont));
                     }
 
                     cont += 1;
                 }
+
+                if(estadisticasRosa.size() > 1) {
+                    totalRosa.setText(estadisticasRosa.size() + " caramelos");
+                }else{
+                    totalRosa.setText(estadisticasRosa.size() + " caramelo");
+                }
+
+                if(estadisticasTurquesa.size() > 1 ) {
+                    totalTurquesa.setText(estadisticasTurquesa.size() + " caramelos");
+                }else{
+                    totalTurquesa.setText(estadisticasTurquesa.size() + " caramelo");
+                }
+
+                if(estadisticasNaranja.size() > 1){
+                    totalNaranja.setText(estadisticasNaranja.size() + " caramelos");
+                }else{
+                    totalNaranja.setText(estadisticasNaranja.size() + " caramelo");
+                }
+
+                if(estadisticasGris.size() > 1){
+                    totalGris.setText(estadisticasGris.size() + " caramelos");
+                }else{
+                    totalGris.setText(estadisticasGris.size() + " caramelo");
+                }
+
+
                 createData();
             }
 
